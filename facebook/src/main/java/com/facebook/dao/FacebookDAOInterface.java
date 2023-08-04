@@ -6,4 +6,6 @@ public interface FacebookDAOInterface {
 
 	int createProfileDAO(FacebookUser fuser);
 
+	FacebookUser viewProfileDAO(FacebookUser fuser);
+
 }

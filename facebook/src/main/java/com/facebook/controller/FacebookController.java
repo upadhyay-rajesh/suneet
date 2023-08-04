@@ -9,38 +9,57 @@ import com.facebook.service.FacebookServiceInterface;
 public class FacebookController implements FacebookControllerInterface {
 
 	public void createProfileController() {
-		Scanner sc=new Scanner(System.in);
-		
+		Scanner sc = new Scanner(System.in);
+
 		System.out.println("Enter Your Name");
-		String name=sc.next();
+		String name = sc.next();
 		System.out.println("Enter Your Password");
-		String password=sc.next();
+		String password = sc.next();
 		System.out.println("Enter Your Email");
-		String email=sc.next();
+		String email = sc.next();
 		System.out.println("Enter Your Address");
-		String address=sc.next();
-		
-		FacebookUser fuser=new FacebookUser();
+		String address = sc.next();
+
+		FacebookUser fuser = new FacebookUser();
 		fuser.setName(name);
 		fuser.setPassword(password);
 		fuser.setEmail(email);
 		fuser.setAddress(address);
-		
-		FacebookServiceInterface fservice=new FacebookService();
-		int i=fservice.createProfileService(fuser);
-		
-		if(i>0) {
+
+		FacebookServiceInterface fservice = new FacebookService();
+		int i = fservice.createProfileService(fuser);
+
+		if (i > 0) {
 			System.out.println("profile created");
-		}
-		else {
+		} else {
 			System.out.println("could not create profile");
 		}
-		
 
 	}
 
 	public void viewProfileController() {
-		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Enter Your Email to view profile");
+		String email = sc.next();
+		
+		FacebookUser fuser = new FacebookUser();
+		fuser.setEmail(email);
+		
+		FacebookServiceInterface fservice = new FacebookService();
+		FacebookUser fu=fservice.viewProfileService(fuser);
+		
+		if(fu!=null) {
+			System.out.println("your detail is below");
+			System.out.println("Name is "+fu.getName());
+			System.out.println("Password is "+fu.getPassword());
+			System.out.println("Email is "+fu.getEmail());
+			System.out.println("Address is "+fu.getAddress());
+			
+		}
+		else {
+			System.out.println("this email does not exist");
+		}
 
 	}
 

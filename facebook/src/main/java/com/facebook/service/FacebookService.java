@@ -11,4 +11,9 @@ public class FacebookService implements FacebookServiceInterface {
 		return fdao.createProfileDAO(fuser);
 	}
 
+	public FacebookUser viewProfileService(FacebookUser fuser) {
+		FacebookDAOInterface fdao=new FacebookDAO();
+		return fdao.viewProfileDAO(fuser);
+	}
+
 }
