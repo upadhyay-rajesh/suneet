@@ -1,14 +1,19 @@
 package com.facebook.controller;
 
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import com.facebook.entity.FacebookUser;
+import com.facebook.exception.UserNotFoundException;
 import com.facebook.service.FacebookService;
 import com.facebook.service.FacebookServiceInterface;
+import com.facebook.util.SortByName;
 
 public class FacebookController implements FacebookControllerInterface {
 
-	public void createProfileController() {
+	public void createProfileController() throws ClassNotFoundException,SQLException{
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Enter Your Name");
@@ -45,7 +50,7 @@ public class FacebookController implements FacebookControllerInterface {
 		
 		FacebookUser fuser = new FacebookUser();
 		fuser.setEmail(email);
-		
+		try {
 		FacebookServiceInterface fservice = new FacebookService();
 		FacebookUser fu=fservice.viewProfileService(fuser);
 		
@@ -59,6 +64,10 @@ public class FacebookController implements FacebookControllerInterface {
 		}
 		else {
 			System.out.println("this email does not exist");
+		}
+		}
+		catch(UserNotFoundException e) {
+			System.out.println(e);
 		}
 
 	}
@@ -79,8 +88,36 @@ public class FacebookController implements FacebookControllerInterface {
 	}
 
 	public void viewAllProfileController() {
-		// TODO Auto-generated method stub
-
+		FacebookServiceInterface fservice = new FacebookService();
+		List<FacebookUser> fu=fservice.viewAllProfileService();
+		System.out.println("Before Sorting ******");
+		for(FacebookUser f1:fu) {
+			System.out.println("your detail is below");
+			System.out.println("Name is "+f1.getName());
+			System.out.println("Password is "+f1.getPassword());
+			System.out.println("Email is "+f1.getEmail());
+			System.out.println("Address is "+f1.getAddress());
+		}
+		System.out.println("After Sorting ******");
+		
+		Collections.sort(fu, new SortByName());
+		
+		for(FacebookUser f1:fu) {
+			System.out.println("your detail is below");
+			System.out.println("Name is "+f1.getName());
+			System.out.println("Password is "+f1.getPassword());
+			System.out.println("Email is "+f1.getEmail());
+			System.out.println("Address is "+f1.getAddress());
+		}
 	}
 
 }
+
+
+
+
+
+
+
+
+

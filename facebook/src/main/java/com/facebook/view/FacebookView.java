@@ -1,5 +1,6 @@
 package com.facebook.view;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.facebook.controller.FacebookController;
@@ -7,7 +8,7 @@ import com.facebook.controller.FacebookControllerInterface;
 
 public class FacebookView {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)throws ClassNotFoundException,SQLException {
 		String s = "y";
 
 		while (s.equals("y")) {
