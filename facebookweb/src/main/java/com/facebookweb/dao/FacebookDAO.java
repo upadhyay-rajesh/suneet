@@ -95,4 +95,31 @@ public class FacebookDAO implements FacebookDAOInterface {
 		return mm;
 	}
 
+	public boolean checkemailDao(FacebookUser fuser) {
+		boolean i=false;
+		//step 1 load driver
+		try {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		//step 2 create connection with database
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","rajesh");
+		//step 3 create query
+		
+		PreparedStatement ps=con.prepareStatement("select * from facebookusersuneetweb where email=? ");
+		ps.setString(1,fuser.getEmail());
+		
+		
+		
+		
+		ResultSet res=ps.executeQuery();
+		if(res.next()) {
+			i=true;
+		}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return i;
+	}
+
 }

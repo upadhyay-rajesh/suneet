@@ -13,4 +13,6 @@ public interface FacebookServiceInterface {
 
 	List<TimeLine> timelineService(FacebookUser fu);
 
+	boolean checkEmailService(FacebookUser fu);
+
 }

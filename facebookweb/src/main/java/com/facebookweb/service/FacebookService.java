@@ -27,4 +27,10 @@ public class FacebookService implements FacebookServiceInterface {
 		return i;
 	}
 
+	public boolean checkEmailService(FacebookUser fu) {
+		FacebookDAOInterface fs=new FacebookDAO();
+		boolean i=fs.checkemailDao(fu);
+		return i;
+	}
+
 }

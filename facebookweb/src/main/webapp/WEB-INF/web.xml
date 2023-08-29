@@ -22,6 +22,18 @@
   	<description></description>
   	<servlet-class>com.facebookweb.controller.TimeLineServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>CheckEmailServlet</servlet-name>
+  	<display-name>CheckEmailServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.facebookweb.controller.CheckEmailServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>GenerateCaptchaServlet</servlet-name>
+  	<display-name>GenerateCaptchaServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.facebookweb.controller.GenerateCaptchaServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>FacebookRegistration</servlet-name>
   	<url-pattern>/FacebookRegistration</url-pattern>
@@ -33,5 +45,13 @@
   <servlet-mapping>
   	<servlet-name>TimeLineServlet</servlet-name>
   	<url-pattern>/TimeLineServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CheckEmailServlet</servlet-name>
+  	<url-pattern>/CheckEmailServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GenerateCaptchaServlet</servlet-name>
+  	<url-pattern>/GenerateCaptchaServlet</url-pattern>
   </servlet-mapping>
 </web-app>

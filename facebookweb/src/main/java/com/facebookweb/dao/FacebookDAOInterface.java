@@ -13,4 +13,6 @@ public interface FacebookDAOInterface {
 
 	List<TimeLine> timelineDao(FacebookUser fu);
 
+	boolean checkemailDao(FacebookUser fu);
+
 }
