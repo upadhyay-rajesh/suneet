@@ -7,6 +7,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityTransaction;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import com.facebookweb.entity.FacebookUser;
 import com.facebookweb.entity.TimeLine;
 
@@ -14,7 +20,17 @@ public class FacebookDAO implements FacebookDAOInterface {
 
 	public int createProfileDao(FacebookUser fuser) {
 		int i=0;
-		//step 1 load driver
+		
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		
+		EntityTransaction et=s.getTransaction();
+		et.begin();
+		s.save(fuser);
+		et.commit();
+		i=1;
+		
+		/*//step 1 load driver
 		try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		//step 2 create connection with database
@@ -32,7 +48,7 @@ public class FacebookDAO implements FacebookDAOInterface {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		return i;
 	}
 
