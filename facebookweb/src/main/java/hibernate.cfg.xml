@@ -14,6 +14,7 @@
     <property name="hbm2ddl.auto">update</property>
          
     <mapping class="com.facebookweb.entity.FacebookUser" />
+    <mapping class="com.facebookweb.entity.TimeLine" />
   
       
   </session-factory>

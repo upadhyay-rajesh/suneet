@@ -1,7 +1,10 @@
 package com.facebookweb.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,6 +15,10 @@ public class FacebookUser {
 	@Id
 	private String email;
 	private String address;
+	
+	@OneToMany(mappedBy = "fuser")
+	private List<TimeLine> tlist;
+	
 	public String getName() {
 		return name;
 	}

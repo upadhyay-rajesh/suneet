@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,8 +55,17 @@ public class FacebookDAO implements FacebookDAOInterface {
 
 	public boolean loginProfileDao(FacebookUser fuser) {
 		boolean i=false;
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		Query q=s.createQuery("from com.facebookweb.entity.FacebookUser f where f.email=:ee and f.password=:pw");
+		q.setParameter("ee", fuser.getEmail());
+		q.setParameter("pw", fuser.getPassword());
+		int j=q.getFirstResult();
+		if(j>0) {
+			i=true;
+		}
 		//step 1 load driver
-		try {
+		/*try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		//step 2 create connection with database
 		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","rajesh");
@@ -75,12 +85,20 @@ public class FacebookDAO implements FacebookDAOInterface {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		return i;
 	}
 
 	public List<TimeLine> timelineDao(FacebookUser fuser) {
-		List<TimeLine> mm=new ArrayList<TimeLine>();
+		
+		
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session s=sf.openSession();
+		Query q=s.createQuery("from com.facebookweb.entity.TimeLine t where t.receiver=:ee");
+		q.setParameter("ee", fuser.getEmail());
+		List<TimeLine> mm=q.getResultList();
+		
+		/*
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			//step 2 create connection with database
@@ -107,7 +125,7 @@ public class FacebookDAO implements FacebookDAOInterface {
 			}
 			catch(Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 		return mm;
 	}
 
